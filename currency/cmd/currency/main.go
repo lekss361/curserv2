@@ -51,7 +51,6 @@ func main() {
 	}
 	cw := worker.NewCurrencyWorker(svc, logger, interval, baseCurrency)
 
-	// Create gRPC server and register service
 	grpcServer := grpc.NewServer()
 	h := handlerpkg.NewCurrencyHandler(ratesRepo)
 	grpcHandler := handlerpkg.NewGRPCServer(h)

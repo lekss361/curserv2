@@ -29,7 +29,6 @@ func New() (*sql.DB, error) {
 	return db, nil
 }
 
-// Migrate запускает все миграции «вверх» из папки internal/db/migrations.
 func Migrate(db *sql.DB) error {
 	driver, err := postgres.WithInstance(db, &postgres.Config{})
 	if err != nil {
@@ -48,7 +47,6 @@ func Migrate(db *sql.DB) error {
 	return nil
 }
 
-// MigrateDown откатывает все миграции (возвращает БД к изначальному состоянию).
 func MigrateDown(db *sql.DB) error {
 	driver, err := postgres.WithInstance(db, &postgres.Config{})
 	if err != nil {

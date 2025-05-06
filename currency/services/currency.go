@@ -9,14 +9,9 @@ import (
 	"time"
 )
 
-// CurrencyService defines methods to fetch and format currency rates
-// Date is returned as time.Time in DTO; JSON marshalling can format it to "YYYY-MM-DD"
 type CurrencyService interface {
-	// GetRatesByDate returns rates for a given date wrapped in a DTO ready for JSON
 	GetRatesByDate(ctx context.Context, date time.Time) (dto.RatesResponse, error)
-	// GetRatesHistory returns historical rates between two dates
 	GetRatesHistory(ctx context.Context, start, end time.Time) ([]dto.RatesResponse, error)
-	// FetchAndSaveRates fetches fresh rates and persists them
 	FetchAndSaveRates(ctx context.Context, baseCurrency string) error
 }
 
@@ -25,12 +20,10 @@ type currencyService struct {
 	logger *zap.Logger
 }
 
-// NewCurrencyService constructs a CurrencyService
 func NewCurrencyService(repo dto.RatesRepo, logger *zap.Logger) CurrencyService {
 	return &currencyService{repo: repo, logger: logger}
 }
 
-// GetRatesByDate fetches raw rates, filters by 'rub' prefix, trims it, lowercases keys, and wraps in DTO
 func (s *currencyService) GetRatesByDate(ctx context.Context, date time.Time) (dto.RatesResponse, error) {
 	raw, err := s.repo.Get(date)
 	if err != nil {
@@ -43,7 +36,6 @@ func (s *currencyService) GetRatesByDate(ctx context.Context, date time.Time) (d
 			rates[key] = rate
 		}
 	}
-	// Wrap in DTO with time.Time Date
 	return dto.RatesResponse{
 		Date: date,
 		Rub:  rates,
@@ -76,7 +68,6 @@ func (s *currencyService) FetchAndSaveRates(ctx context.Context, baseCurrency st
 		"gbp": 0.8,
 	}
 
-	// Prepare DB format: prefix keys with 'rub' in uppercase codes
 	date := time.Now()
 	dbRates := make(map[string]float64)
 	for k, v := range rates {

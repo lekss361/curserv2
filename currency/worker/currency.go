@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-// CurrencyWorker выполняет периодическое обновление курсов
 type CurrencyWorker struct {
 	service      service.CurrencyService
 	logger       *zap.Logger
@@ -16,7 +15,6 @@ type CurrencyWorker struct {
 	shutdownChan chan struct{}
 }
 
-// NewCurrencyWorker создает новый воркер
 func NewCurrencyWorker(service service.CurrencyService, logger *zap.Logger, interval time.Duration, baseCurrency string) *CurrencyWorker {
 	return &CurrencyWorker{
 		service:      service,
@@ -27,7 +25,6 @@ func NewCurrencyWorker(service service.CurrencyService, logger *zap.Logger, inte
 	}
 }
 
-// Start запускает воркер в отдельной горутине
 func (w *CurrencyWorker) Start(ctx context.Context) {
 	w.logger.Info("Starting currency worker", zap.Duration("interval", w.interval))
 
@@ -53,7 +50,6 @@ func (w *CurrencyWorker) Start(ctx context.Context) {
 	}()
 }
 
-// Wait blocks until worker is shutdown
 func (w *CurrencyWorker) Wait() {
 	<-w.shutdownChan
 }

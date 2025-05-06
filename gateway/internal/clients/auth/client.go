@@ -62,7 +62,6 @@ func (c *Client) Login(ctx context.Context, login, password string) (string, err
 	return tr.Token, nil
 }
 
-// ValidateToken checks token validity via Auth service
 func (c *Client) ValidateToken(ctx context.Context, token string) (bool, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.baseURL+"/validate", nil)
 	if err != nil {
