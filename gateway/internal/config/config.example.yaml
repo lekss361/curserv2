@@ -1,0 +1,4 @@
+server:
+bind_addr: ":8080"
+auth_service_url: "http://localhost:8081"
+currency_service_url: "http://localhost:50051"

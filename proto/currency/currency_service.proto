@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/lekss361/curserv2/pkg/proto;proto";
+
+service CurrencyService {
+  rpc GetRateByDate (GetRateByDateRequest) returns (GetRateByDateResponse);
+  rpc GetHistory (GetHistoryRequest) returns (GetHistoryResponse);
+}
+
+message GetRateByDateRequest {
+  google.protobuf.Timestamp date = 1;
+}
+
+message GetRateByDateResponse {
+  google.protobuf.Timestamp date = 1;
+  map<string, double> rub = 2;
+}
+
+message GetHistoryRequest {
+  google.protobuf.Timestamp start = 1;
+  google.protobuf.Timestamp end = 2;
+}
+
+message DateRates {
+  google.protobuf.Timestamp date = 1;
+  map<string, double> rub = 2;
+}
+
+message GetHistoryResponse {
+  repeated DateRates history = 1;
+}

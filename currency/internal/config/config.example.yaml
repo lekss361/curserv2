@@ -1,0 +1,6 @@
+# config.yaml
+grpc_port: 12358
+database_url: "postgres://postgres:1234@localhost:5432/curr?sslmode=disable"
+external_service_url: "https://latest.currency-api.pages.dev/v1/currencies/rub.json"
+migrations_path: "file://C:/Users/User/Desktop/golangeduc/currencyservice/currency.go/internal/migrations"
+logs_path: "C:/Users/User/Desktop/golangeduc/currencyservice/currency/logs"
