@@ -21,7 +21,7 @@ type currencyService struct {
 }
 
 func NewCurrencyService(grpcURL string) (CurrencyService, error) {
-	conn, err := grpc.Dial(grpcURL, grpc.WithInsecure())
+	conn, err := grpc.NewClient(grpcURL, grpc.WithInsecure())
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to currency service: %w", err)
 	}

@@ -35,7 +35,6 @@ func AuthMiddleware(authService authsvc.AuthService) func(http.Handler) http.Han
 				return
 			}
 
-			// Add user login to context
 			ctx := context.WithValue(r.Context(), ctxKeyUser{}, login)
 			r = r.WithContext(ctx)
 

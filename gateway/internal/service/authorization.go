@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"fmt"
-
 	authclient "github.com/lekss361/curserv2/gateway/internal/clients/auth"
 	"github.com/lekss361/curserv2/gateway/internal/repository"
 )
